@@ -4,7 +4,6 @@ import '@fontsource-variable/frank-ruhl-libre';
 import '@fontsource-variable/heebo';
 import './globals.css';
 import { NAV, SITE } from '@/lib/site';
-import { getPaletteIndex } from '@/lib/library';
 import HeaderTools from '@/components/HeaderTools';
 import Effects from '@/components/Effects';
 import { LadderMark } from '@/components/Ladder';
@@ -43,7 +42,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </Link>
               ))}
             </nav>
-            <HeaderTools items={getPaletteIndex()} />
+            <HeaderTools />
           </div>
         </header>
         <main>{children}</main>
@@ -52,11 +51,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <div>
               <b>בעל הסולם</b>
               <p>
-                הטקסטים מובאים בלשונם, מתוך המהדורות הדיגיטליות הפתוחות של{' '}
+                באתר מופיעים דברי בעל הסולם בלבד, בלשונו, ללא הערות, השלמות או כותרות של מהדירים מאוחרים. מקור הטקסטים: המהדורות הדיגיטליות של{' '}
                 <a href="https://www.sefaria.org.il" target="_blank" rel="noreferrer">
                   ספריא
                 </a>
-                . האתר הוא מיזם לימודי ללא מטרות רווח.
+                ; פירוט הנוסח מופיע בעמוד של כל חיבור.
               </p>
             </div>
             <nav aria-label="ניווט תחתון">

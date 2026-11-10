@@ -1,51 +1,57 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import SefirotTree from '@/components/SefirotTree';
+import Lexicon from '@/components/Lexicon';
+import { getGlossary, type Term } from '@/lib/library';
 
-export const metadata: Metadata = { title: 'מושגי יסוד' };
+export const metadata: Metadata = { title: 'מושגי יסוד', description: 'פירוש המלות של בעל הסולם, בלשונו, מתוך לוחות התשובות שבתלמוד עשר הספירות.' };
 
-const TERMS: { t: string; d: string; q?: string }[] = [
-  { t: 'מחשבת הבריאה', d: 'נקודת המוצא של כל השיטה: הבריאה נבראה כדי להנות לנבראים. מכאן נגזר כל השאר — כדי לקבל את ההטבה נדרש כלי, והכלי הוא הרצון.' },
-  { t: 'רצון לקבל', d: 'החומר שממנו עשויה הבריאה. מידת התענוג נמדדת במידת הרצון אליו, ולכן הרצון לקבל הוא הכלי של השפע — וגם מקור הנפרדות, כל עוד הוא פועל לעצמו בלבד.' },
-  { t: 'רצון להשפיע', d: 'תכונת המאציל, ההפוכה לרצון לקבל. העבודה הרוחנית כולה היא קניית התכונה הזאת: לקבל רק כדי להשפיע נחת רוח.' },
-  { t: 'השתוות הצורה', d: 'ברוחניות קרבה ומרחק אינם עניין של מקום אלא של דמיון תכונות. שינוי צורה מרחיק, השתוות הצורה מדביקה — וזו משמעותה של דבקות.' },
-  { t: 'צמצום', d: 'ההחלטה הראשונה של הנברא שלא לקבל עוד לעצמו. מאז הצמצום אין האור מתקבל אלא במידה שיש כוונה להשפיע.', q: 'צמצום א' },
-  { t: 'מסך', d: 'כוח הדחייה שעומד מול האור ומסרב לקבלו לשם קבלה עצמית. המסך הוא שהופך רצון גולמי לכלי של השפעה.' },
-  { t: 'אור חוזר', d: 'האור שנדחה מן המסך ועולה חזרה. דווקא הוא נעשה הלבוש שבו מתקבל האור הישר — מה שנדחה הופך לכלי קבלה חדש.' },
-  { t: 'זווג דהכאה', d: 'המפגש בין האור העליון למסך: האור מכה, המסך דוחה, ומן ההכאה נולדת מדרגה חדשה לפי שיעור הדחייה.' },
-  { t: 'פרצוף', d: 'מדרגה שלמה בת עשר ספירות, המתחלקת לראש, תוך וסוף — החשבון, הקבלה בפועל, והמקום שבו המסך עוצר.' },
-  { t: 'לשמה', d: 'עיסוק בתורה ובמצוות שלא לתועלת עצמית. בעל הסולם מדגיש שמתוך שלא לשמה באים לשמה, בכוח המאור שבתורה.', q: 'לשמה' },
-  { t: 'ערבות', d: 'האחריות ההדדית שבה כל אחד ערב לצורכי חברו. לפי מאמר הערבות זהו התנאי שבלעדיו לא ניתנה התורה.' },
-  { t: 'ואהבת לרעך כמוך', d: 'הכלל שכל שאר המצוות הן פרטיו וביאוריו. אהבת הזולת היא המעבר המעשי מקבלה להשפעה.' },
-];
+const CORE = ['אור', 'כלי', 'צמצום', 'מסך', 'אור ישר', 'אור חוזר', 'זווג דהכאה', 'עביות', 'דבקות', 'התפשטות', 'אור פנימי', 'אור מקיף', 'בורא', 'מאציל', 'מקום', 'זמן', 'תנועה', 'ראש'];
+const SEFIROT = ['כתר', 'חכמה', 'בינה', 'זעיר אנפין', 'מלכות'];
+const cite = (x: Term) => `תלמוד עשר הספירות, ${x.part}, לוח התשובות לפירוש המלות, אות ${x.l}`;
 
 export default function Concepts() {
+  const all = getGlossary();
+  // first definition of a term that is an actual definition, not a cross-reference
+  const pick = (t: string) => all.find((x) => x.t === t && x.d.length > 30 && !/^עי['י]|עיין מלת/.test(x.d));
+  const core = CORE.map(pick).filter((x): x is Term => !!x);
+  const sef = SEFIROT.map(pick).filter((x): x is Term => !!x).map((x) => ({ ...x, cite: cite(x) }));
   return (
     <div className="wrap">
       <header className="phead">
-        <span className="eyebrow">מפת דרכים</span>
+        <span className="eyebrow">פירוש המלות</span>
         <h1>מושגי יסוד</h1>
-        <p className="lede">שפת הכתבים מדויקת כשפה של מדע. כאן מוצגים בקצרה המושגים שחוזרים בכל חיבור — כל הסבר הוא נקודת פתיחה בלבד, והדרך המלאה עוברת בטקסטים עצמם.</p>
+        <p className="lede">
+          כל ההגדרות בעמוד זה הן לשונו של בעל הסולם עצמו, מתוך ״לוח התשובות לפירוש המלות״ שחיבר בסוף כל חלק של תלמוד עשר הספירות — {all.length.toLocaleString('he-IL')} ערכים.
+        </p>
       </header>
       <section className="sec" style={{ paddingTop: 20 }}>
-        <SefirotTree />
+        <SefirotTree items={sef} />
       </section>
       <section className="sec" style={{ paddingTop: 20 }}>
         <div className="sec-head">
-          <h2>מילון קצר</h2>
-          <p>ההסברים הם תקציר עריכתי ולא ציטוט. ליד כל מושג — קישור אל מופעיו בכתבים.</p>
+          <h2>מילות יסוד</h2>
+          <p>ליד כל ערך — מקומו בתלמוד עשר הספירות.</p>
         </div>
         <div className="gloss">
-          {TERMS.map((x, i) => (
+          {core.map((x, i) => (
             <article className="term reveal" key={x.t} style={{ ['--i' as string]: i % 3 }}>
               <h3>{x.t}</h3>
               <p>{x.d}</p>
-              <Link href={`/search/?q=${encodeURIComponent(x.q ?? x.t)}`}>
-                למצוא בכתבים <span className="arrow">←</span>
+              <cite>{cite(x)}</cite>
+              <Link href={`/read/tes/${x.n}/#b${x.b}`}>
+                אל המקור <span className="arrow">←</span>
               </Link>
             </article>
           ))}
         </div>
+      </section>
+      <section className="sec" style={{ paddingTop: 20 }}>
+        <div className="sec-head">
+          <h2>הלקסיקון המלא</h2>
+          <p>חיפוש בכל ערכי פירוש המלות, מששה־עשר חלקי תלמוד עשר הספירות.</p>
+        </div>
+        <Lexicon />
       </section>
     </div>
   );

@@ -38,4 +38,13 @@ for (const w of works) {
   manifest.push({ slug: w.slug, title: w.title, files });
 }
 fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(manifest));
+
+// quick-navigation index for the command palette (loaded on demand)
+const palette = [];
+for (const w of works) {
+  palette.push({ t: w.title, s: w.category, h: `/work/${w.slug}/` });
+  if (w.toc.length > 1) for (const e of w.toc) palette.push({ t: e.title, s: [w.title, ...e.path].join(' · '), h: `/read/${w.slug}/${e.pages[0].n}/` });
+}
+fs.writeFileSync(path.join(OUT, 'palette.json'), JSON.stringify(palette));
+fs.copyFileSync(path.join(ROOT, 'content/glossary.json'), path.join(OUT, 'glossary.json'));
 console.log('search shards:', manifest.reduce((a, m) => a + m.files.length, 0));

@@ -1,6 +1,7 @@
 'use client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { BASE } from '@/lib/site';
 
 type Item = { t: string; s: string; h: string };
 const STATIC: Item[] = [
@@ -11,8 +12,9 @@ const STATIC: Item[] = [
 ];
 const norm = (s: string) => s.replace(/[֑-ׇ"'׳״]/g, '').toLowerCase();
 
-export default function HeaderTools({ items }: { items: Item[] }) {
+export default function HeaderTools() {
   const [open, setOpen] = useState(false);
+  const [items, setItems] = useState<Item[]>([]);
   const [q, setQ] = useState('');
   const [sel, setSel] = useState(0);
   const router = useRouter();
@@ -39,6 +41,14 @@ export default function HeaderTools({ items }: { items: Item[] }) {
     },
     [close, router],
   );
+
+  useEffect(() => {
+    if (!open || items.length) return;
+    fetch(`${BASE}/search/palette.json`)
+      .then((r) => r.json())
+      .then(setItems)
+      .catch(() => {});
+  }, [open, items.length]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

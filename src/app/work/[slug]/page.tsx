@@ -75,6 +75,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </section>
       ))}
 
+      {w.textNote && (
+        <aside className="textnote">
+          <b>על הנוסח</b>
+          <p>{w.textNote}</p>
+        </aside>
+      )}
       <p className="srcnote">
         מקור הטקסט: {w.source.edition} ·{' '}
         <a href={w.source.url} target="_blank" rel="noreferrer">

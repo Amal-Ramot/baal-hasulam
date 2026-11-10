@@ -9,6 +9,7 @@ export type Work = {
   category: string;
   year: string;
   blurb: string;
+  textNote?: string;
   source: { edition: string; url: string; via: string };
   pageCount: number;
   chars: number;
@@ -49,17 +50,10 @@ export function chipLabel(unit: string | null, label: string, i: number) {
 }
 export const fmt = (n: number) => new Intl.NumberFormat('he-IL').format(n);
 
-/** Compact index for the command palette. */
-export function getPaletteIndex() {
-  const items: { t: string; s: string; h: string }[] = [];
-  for (const w of getWorks()) {
-    items.push({ t: w.title, s: w.category, h: `/work/${w.slug}/` });
-    for (const e of w.toc) {
-      if (w.toc.length === 1) continue;
-      items.push({ t: e.title, s: [w.title, ...e.path].join(' · '), h: `/read/${w.slug}/${e.pages[0].n}/` });
-    }
-  }
-  return items;
+export type Term = { t: string; d: string; part: string; l: string; n: number; b: number };
+/** Baal HaSulam's own definitions, from the "answers on terminology" tables of Talmud Eser HaSefirot. */
+export function getGlossary(): Term[] {
+  return JSON.parse(fs.readFileSync(path.join(ROOT, 'glossary.json'), 'utf8')) as Term[];
 }
 
 /** Works that are not yet part of the digital library. */
