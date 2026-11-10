@@ -26,7 +26,7 @@
 
 ## טכנולוגיה
 
-Next.js 16 (App Router, React 19 Server Components) בייצוא סטטי מלא — כ-1,050 עמודים שנבנים מראש, ללא שרת.
+Next.js 16 (App Router, React 19) בייצוא סטטי מלא, ללא שרת. עמודי הקריאה נטענים כקובצי נתונים קטנים (`public/data`, נבנים אוטומטית), כך שהאתר כולו שוקל כ-58MB.
 
 ```bash
 npm install
@@ -36,7 +36,7 @@ npm run build    # ייצוא סטטי אל out/
 
 - `content/` — הטקסטים המנורמלים (JSON), נוצרים ע"י `npm run content`.
 - `scripts/build-content.mjs` — מוריד את המהדורות העבריות מספריא וממיר אותן לעמודי לימוד.
-- `scripts/build-search.mjs` — בונה את אינדקס החיפוש אל `public/search/` (רץ אוטומטית לפני build/dev).
+- `scripts/build-search.mjs` — בונה את אינדקס החיפוש אל `public/search/` ואת עמודי הקריאה אל `public/data/` (רץ אוטומטית לפני build/dev).
 - `.github/workflows/pages.yml` — בנייה ופריסה ל-GitHub Pages בכל push.
 
 ## פריסה ל-GitHub Pages
