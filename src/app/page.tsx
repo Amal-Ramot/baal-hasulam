@@ -51,9 +51,13 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="hero-art rise" style={{ ['--i' as string]: 2 }}>
+          <figure className="hero-art rise" style={{ ['--i' as string]: 2 }}>
             <Ladder />
-          </div>
+            <figcaption className="verse">
+              וַיַּחֲלֹם וְהִנֵּה סֻלָּם מֻצָּב אַרְצָה וְרֹאשׁוֹ מַגִּיעַ הַשָּׁמָיְמָה וְהִנֵּה מַלְאֲכֵי אֱלֹהִים עֹלִים וְיֹרְדִים בּוֹ
+              <cite>בראשית כח, יב</cite>
+            </figcaption>
+          </figure>
         </div>
       </section>
 

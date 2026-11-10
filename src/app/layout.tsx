@@ -14,17 +14,15 @@ export const metadata: Metadata = {
   openGraph: { title: `${SITE.name} — ${SITE.tagline}`, description: SITE.description, locale: 'he_IL', type: 'website' },
 };
 export const viewport: Viewport = {
-  themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#0b0d12' },
-    { media: '(prefers-color-scheme: light)', color: '#f5efe2' },
-  ],
+  themeColor: '#0b0d12',
 };
 
-const themeScript = `try{var t=localStorage.getItem('bs-theme');if(!t)t=matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';document.documentElement.dataset.theme=t}catch(e){}`;
+// dark is the default; a visitor's own choice (the header toggle) is remembered
+const themeScript = `try{document.documentElement.dataset.theme=localStorage.getItem('bs-theme')==='light'?'light':'dark'}catch(e){document.documentElement.dataset.theme='dark'}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="he" dir="rtl" suppressHydrationWarning>
+    <html lang="he" dir="rtl" data-theme="dark" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

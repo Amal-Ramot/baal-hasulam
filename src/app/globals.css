@@ -124,18 +124,26 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
 .rise { opacity: 0; transform: translateY(22px); animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) forwards; animation-delay: calc(var(--i, 0) * 90ms + 80ms); }
 @keyframes rise { to { opacity: 1; transform: none; } }
 
-/* ladder */
-.ladder { width: 100%; max-width: 400px; margin-inline: auto; display: block; overflow: visible; }
-.ladder .rail { stroke: var(--gold); stroke-width: 1.4; opacity: 0.55; stroke-dasharray: 700; stroke-dashoffset: 700; animation: draw 2.2s 0.2s ease-out forwards; }
-.ladder .rung { stroke: var(--gold); stroke-width: 1.2; opacity: 0.25; animation: rung 7s calc(var(--k) * 0.32s + 1.2s) ease-in-out infinite; }
-.ladder text { font-family: var(--serif); font-size: 15px; fill: var(--ink-2); opacity: 0; animation: fade 1s calc(var(--k) * 0.12s + 1s) forwards; }
-.ladder .node { fill: var(--gold-2); opacity: 0.2; animation: node 7s calc(var(--k) * 0.32s + 1.2s) ease-in-out infinite; }
-.ladder .halo { fill: url(#halo); opacity: 0.9; }
-.ladder .spark { fill: var(--gold-2); filter: drop-shadow(0 0 8px var(--gold)); }
+/* Jacob's ladder */
+.hero-art { margin: 0; }
+.ladder { height: clamp(380px, calc(100svh - 330px), 640px); width: auto; max-width: 100%; margin-inline: auto; display: block; overflow: visible; }
+.ladder .heaven { fill: url(#heaven); animation: breathe 6s ease-in-out infinite; transform-origin: 180px 40px; }
+.ladder .ray { stroke: var(--gold-2); stroke-width: 1; opacity: 0.1; }
+.ladder .star { fill: var(--gold-2); animation: twinkle 4s calc(var(--d) * 1s) ease-in-out infinite; }
+.ladder .earth { fill: url(#earth); }
+.ladder .horizon { fill: none; stroke: url(#horizon); stroke-width: 1.2; }
+.ladder .stone { fill: color-mix(in srgb, var(--gold) 38%, var(--bg)); }
+.ladder .rail { stroke: url(#rail); stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 700; stroke-dashoffset: 700; animation: draw 2.4s 0.2s ease-out forwards; }
+.ladder .rung { stroke: var(--gold); stroke-width: 1.2; opacity: var(--o); animation: fadeo 1.2s calc(var(--k) * 0.1s + 0.9s) backwards; }
+.ladder text { font-family: var(--serif); font-size: 14px; fill: var(--ink-2); opacity: 0; animation: fade 1s calc(var(--k) * 0.12s + 1.2s) forwards; }
+.ladder .angel { fill: var(--gold-2); filter: drop-shadow(0 0 7px var(--gold)); }
+.verse { margin: 26px auto 0; max-width: 21em; text-align: center; font-family: var(--serif); font-size: 18.5px; line-height: 1.9; color: var(--ink-2); text-wrap: balance; }
+.verse cite { display: block; margin-top: 8px; font-family: var(--sans); font-style: normal; font-size: 13px; letter-spacing: 0.06em; color: var(--gold); }
 @keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes fade { to { opacity: 0.85; } }
-@keyframes rung { 0%, 14%, 100% { opacity: 0.25; stroke-width: 1.2; } 5% { opacity: 1; stroke-width: 2.2; } }
-@keyframes node { 0%, 14%, 100% { opacity: 0.25; r: 2.5; } 5% { opacity: 1; r: 4.5; } }
+@keyframes fade { to { opacity: 0.8; } }
+@keyframes fadeo { from { opacity: 0; } }
+@keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.9; } }
+@keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.08); opacity: 1; } }
 
 /* ---------- sections ---------- */
 .sec { padding: 90px 0; }
@@ -359,7 +367,9 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
 /* ---------- responsive ---------- */
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; }
-  .hero-art { order: -1; max-width: 230px; margin-inline: auto; }
+  .hero-art { order: -1; max-width: 300px; margin-inline: auto; }
+  .hero-art .ladder { height: 400px; }
+  .verse { font-size: 16.5px; margin-top: 14px; }
   .hero { padding-top: 20px; }
   .works { grid-template-columns: 1fr 1fr; }
   .card, .card.big, .works .card:nth-child(n + 6) { grid-column: span 1; min-height: 0; }
