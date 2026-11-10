@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useState } from 'react';
+import { readHref } from '@/lib/site';
 
 type Item = { t: string; d: string; cite: string; n: number; b: number };
 // each of the ten sefirot belongs to one of the five behinot: keter, hokhma, bina, zeir anpin (six sefirot), malkhut
@@ -42,7 +43,7 @@ export default function SefirotTree({ items }: { items: Item[] }) {
             <p>{it.d}</p>
             <cite>{it.cite}</cite>
             <div className="hero-cta">
-              <Link className="btn btn-line" href={`/read/tes/${it.n}/#b${it.b}`}>
+              <Link className="btn btn-line" href={readHref('tes', it.n, it.b)}>
                 אל המקור <span className="arrow">←</span>
               </Link>
             </div>

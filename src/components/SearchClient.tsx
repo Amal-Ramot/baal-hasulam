@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { BASE } from '@/lib/site';
+import { BASE, readHref } from '@/lib/site';
 
 type Row = [number, number, string, string, string];
 type Hit = { slug: string; work: string; n: number; b: number; where: string; before: string; match: string; after: string };
@@ -94,7 +94,7 @@ export default function SearchClient({ works }: { works: { slug: string; title: 
       </p>
       <div>
         {hits.map((h, i) => (
-          <Link key={i} className="res" href={`/read/${h.slug}/${h.n}/#b${h.b}`}>
+          <Link key={i} className="res" href={readHref(h.slug, h.n, h.b)}>
             <small>
               {h.work}
               {h.where && h.where !== h.work ? ` · ${h.where}` : ''}

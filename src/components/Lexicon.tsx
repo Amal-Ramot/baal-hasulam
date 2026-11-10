@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
-import { BASE } from '@/lib/site';
+import { BASE, readHref } from '@/lib/site';
 
 type Term = { t: string; d: string; part: string; l: string; n: number; b: number };
 const norm = (s: string) => s.replace(/[֑-ׇ"'׳״]/g, '');
@@ -25,11 +25,11 @@ export default function Lexicon() {
   return (
     <>
       <div className="sbox">
-        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="חפשו ערך — למשל: רשימו, פרסא, נקודים" aria-label="חיפוש בלקסיקון" />
+        <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="חפשו ערך — למשל: רשימה, פרסא, נקודות" aria-label="חיפוש בלקסיקון" />
       </div>
       <div className="lex-list" aria-live="polite">
         {hits.map((x) => (
-          <Link className="lex-row" key={`${x.n}-${x.b}`} href={`/read/tes/${x.n}/#b${x.b}`}>
+          <Link className="lex-row" key={`${x.n}-${x.b}`} href={readHref('tes', x.n, x.b)}>
             <div>
               <b>{x.t}</b>
               <small>

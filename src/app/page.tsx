@@ -3,6 +3,7 @@ import Ladder from '@/components/Ladder';
 import WorkCard from '@/components/WorkCard';
 import { ContinueReading, DailyPassage } from '@/components/HomeClient';
 import { fmt, getFeatured, getWorks } from '@/lib/library';
+import { readHref } from '@/lib/site';
 
 export default function Home() {
   const works = getWorks();
@@ -11,7 +12,7 @@ export default function Home() {
   const first = (slug: string, title?: string) => {
     const w = works.find((x) => x.slug === slug)!;
     const e = title ? w.toc.find((t) => t.title === title) : w.toc[0];
-    return `/read/${slug}/${(e ?? w.toc[0]).pages[0].n}/`;
+    return readHref(slug, (e ?? w.toc[0]).pages[0].n);
   };
   return (
     <>

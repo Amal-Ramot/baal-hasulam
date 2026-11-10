@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { readHref } from '@/lib/site';
 import { getMarks, getPrefs, setLast, setPrefs, toggleMark, type Prefs } from '@/lib/store';
 
 type Props = { slug: string; n: number; total: number; work: string; title: string };
@@ -10,8 +11,8 @@ export default function ReaderDock({ slug, n, total, work, title }: Props) {
   const router = useRouter();
   const [prefs, setP] = useState<Prefs>({ fs: 0, font: 'serif' });
   const [marked, setMarked] = useState(false);
-  const prev = n > 1 ? `/read/${slug}/${n - 1}/` : null;
-  const next = n < total ? `/read/${slug}/${n + 1}/` : null;
+  const prev = n > 1 ? readHref(slug, n - 1) : null;
+  const next = n < total ? readHref(slug, n + 1) : null;
 
   useEffect(() => {
     setP(getPrefs());

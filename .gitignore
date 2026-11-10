@@ -5,3 +5,4 @@ out
 public/search
 next-env.d.ts
 *.tsbuildinfo
+public/data

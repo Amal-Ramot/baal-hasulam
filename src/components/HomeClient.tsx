@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { getLast, getMarks, type Mark } from '@/lib/store';
+import { readHref } from '@/lib/site';
 
 export function ContinueReading() {
   const [last, setLast] = useState<Mark | null>(null);
@@ -21,7 +22,7 @@ export function ContinueReading() {
               {last.work} — {last.title}
             </b>
           </div>
-          <Link className="btn btn-gold" href={`/read/${last.slug}/${last.n}/`}>
+          <Link className="btn btn-gold" href={readHref(last.slug, last.n)}>
             המשך קריאה <span className="arrow">←</span>
           </Link>
         </div>
@@ -29,7 +30,7 @@ export function ContinueReading() {
       {marks.length > 0 && (
         <div className="marks" aria-label="הסימניות שלי">
           {marks.slice(0, 8).map((m) => (
-            <Link key={m.slug + m.n} className="chip" href={`/read/${m.slug}/${m.n}/`}>
+            <Link key={m.slug + m.n} className="chip" href={readHref(m.slug, m.n)}>
               ★ {m.work} · {m.title}
             </Link>
           ))}
@@ -55,7 +56,7 @@ export function DailyPassage({ items }: { items: Item[] }) {
       </blockquote>
       <figcaption>
         <cite>
-          <Link href={`/read/${it.slug}/${it.n}/#b${it.b}`}>
+          <Link href={readHref(it.slug, it.n, it.b)}>
             {it.work === it.where ? it.work : `${it.work} · ${it.where.replace(it.work + ', ', '')}`} <span className="arrow">←</span>
           </Link>
         </cite>

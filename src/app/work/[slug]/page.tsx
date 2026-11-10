@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { readHref } from '@/lib/site';
 import { chipLabel, fmt, getWork, getWorks, type TocEntry } from '@/lib/library';
 
 export const dynamicParams = false;
@@ -34,7 +35,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         <h1>{w.title}</h1>
         <p className="lede">{w.blurb}</p>
         <div className="hero-cta">
-          <Link href={`/read/${w.slug}/1/`} className="btn btn-gold">
+          <Link href={readHref(w.slug, 1)} className="btn btn-gold">
             לקרוא מההתחלה <span className="arrow">←</span>
           </Link>
           <Link href={`/search/?in=${w.slug}`} className="btn btn-line">
@@ -62,10 +63,10 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
           {g.title && <h2>{g.title}</h2>}
           {g.entries.map((e) => (
             <div className="toc-row" key={e.pages[0].n}>
-              <Link href={`/read/${w.slug}/${e.pages[0].n}/`}>{e.title}</Link>
+              <Link href={readHref(w.slug, e.pages[0].n)}>{e.title}</Link>
               <div className="pgs">
                 {e.pages.map((p, i) => (
-                  <Link key={p.n} className="pg" href={`/read/${w.slug}/${p.n}/`}>
+                  <Link key={p.n} className="pg" href={readHref(w.slug, p.n)}>
                     {chipLabel(e.unit, p.label, i)}
                   </Link>
                 ))}

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import SefirotTree from '@/components/SefirotTree';
 import Lexicon from '@/components/Lexicon';
 import { getGlossary, type Term } from '@/lib/library';
+import { readHref } from '@/lib/site';
 
 export const metadata: Metadata = { title: 'מושגי יסוד', description: 'פירוש המלות של בעל הסולם, בלשונו, מתוך לוחות התשובות שבתלמוד עשר הספירות.' };
 
@@ -39,7 +40,7 @@ export default function Concepts() {
               <h3>{x.t}</h3>
               <p>{x.d}</p>
               <cite>{cite(x)}</cite>
-              <Link href={`/read/tes/${x.n}/#b${x.b}`}>
+              <Link href={readHref('tes', x.n, x.b)}>
                 אל המקור <span className="arrow">←</span>
               </Link>
             </article>

@@ -257,7 +257,7 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
 .reader-head .where { color: var(--gold); margin-top: 10px; font-size: 16px; }
 .text { width: min(var(--measure), 100% - 40px); margin-inline: auto; font-family: var(--serif); font-size: var(--fs); line-height: 1.85; }
 .blk { position: relative; padding-block: 0.55em; scroll-margin-top: 100px; }
-.blk:target { background: var(--gold-soft); box-shadow: 0 0 0 14px var(--gold-soft); border-radius: 4px; }
+.blk:target, .blk.target { background: var(--gold-soft); box-shadow: 0 0 0 14px var(--gold-soft); border-radius: 4px; }
 .blk > .lbl { position: absolute; inset-inline-start: -74px; top: 0.72em; width: 58px; text-align: end; font-family: var(--serif); font-weight: 700; font-size: 0.8em; color: var(--gold); line-height: 1.85; }
 .blk > .lbl:hover { text-decoration: underline; }
 .blk h2 { font-size: 1.35em; margin: 1.6em 0 0.5em; color: var(--gold); }

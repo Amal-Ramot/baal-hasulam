@@ -39,11 +39,30 @@ for (const w of works) {
 }
 fs.writeFileSync(path.join(OUT, 'manifest.json'), JSON.stringify(manifest));
 
+// reading pages as data files for the client-side reader
+const DATA = path.join(ROOT, 'public/data');
+fs.rmSync(DATA, { recursive: true, force: true });
+const fullTitle = (p) => {
+  if (!p.label) return p.title;
+  if (p.label.startsWith('פרק')) return `${p.title} · ${p.label}`;
+  const unit = p.unit === 'אות' ? (p.label.includes('–') ? 'אותיות ' : 'אות ') : '';
+  return `${p.title} · ${unit}${p.label}`;
+};
+for (const w of works) {
+  fs.mkdirSync(path.join(DATA, w.slug), { recursive: true });
+  const pages = [];
+  for (let n = 1; n <= w.pageCount; n++) pages.push(JSON.parse(fs.readFileSync(path.join(ROOT, 'content/pages', w.slug, n + '.json'), 'utf8')));
+  pages.forEach((p, i) => {
+    const out = { ...p, work: w.title, total: w.pageCount, single: w.toc.length === 1, ft: fullTitle(p), prev: i ? fullTitle(pages[i - 1]) : null, next: i < pages.length - 1 ? fullTitle(pages[i + 1]) : null };
+    fs.writeFileSync(path.join(DATA, w.slug, p.n + '.json'), JSON.stringify(out));
+  });
+}
+
 // quick-navigation index for the command palette (loaded on demand)
 const palette = [];
 for (const w of works) {
   palette.push({ t: w.title, s: w.category, h: `/work/${w.slug}/` });
-  if (w.toc.length > 1) for (const e of w.toc) palette.push({ t: e.title, s: [w.title, ...e.path].join(' · '), h: `/read/${w.slug}/${e.pages[0].n}/` });
+  if (w.toc.length > 1) for (const e of w.toc) palette.push({ t: e.title, s: [w.title, ...e.path].join(' · '), h: `/read/?w=${w.slug}&n=${e.pages[0].n}` });
 }
 fs.writeFileSync(path.join(OUT, 'palette.json'), JSON.stringify(palette));
 fs.copyFileSync(path.join(ROOT, 'content/glossary.json'), path.join(OUT, 'glossary.json'));
