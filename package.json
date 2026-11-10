@@ -1,0 +1,25 @@
+{
+  "name": "baal-hasulam",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "content": "node scripts/build-content.mjs",
+    "search-index": "node scripts/build-search.mjs",
+    "dev": "npm run search-index && next dev",
+    "build": "npm run search-index && next build",
+    "start": "npx serve out"
+  },
+  "dependencies": {
+    "@fontsource-variable/frank-ruhl-libre": "^5.2.0",
+    "@fontsource-variable/heebo": "^5.2.0",
+    "next": "^16.4.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.9.0"
+  }
+}

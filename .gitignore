@@ -1,0 +1,7 @@
+node_modules
+.next
+out
+.cache
+public/search
+next-env.d.ts
+*.tsbuildinfo
