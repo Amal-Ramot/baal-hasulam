@@ -54,7 +54,9 @@ export default function Home() {
           <figure className="hero-art rise" style={{ ['--i' as string]: 2 }}>
             <Ladder />
             <figcaption className="verse">
-              וַיַּחֲלֹם וְהִנֵּה סֻלָּם מֻצָּב אַרְצָה וְרֹאשׁוֹ מַגִּיעַ הַשָּׁמָיְמָה וְהִנֵּה מַלְאֲכֵי אֱלֹהִים עֹלִים וְיֹרְדִים בּוֹ
+              <span>וַיַּחֲלֹם וְהִנֵּה סֻלָּם מֻצָּב אַרְצָה</span>
+              <span>וְרֹאשׁוֹ מַגִּיעַ הַשָּׁמָיְמָה</span>
+              <span>וְהִנֵּה מַלְאֲכֵי אֱלֹהִים עֹלִים וְיֹרְדִים בּוֹ</span>
               <cite>בראשית כח, יב</cite>
             </figcaption>
           </figure>

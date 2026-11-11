@@ -126,7 +126,7 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
 
 /* Jacob's ladder */
 .hero-art { margin: 0; }
-.ladder { height: clamp(380px, calc(100svh - 330px), 640px); width: auto; max-width: 100%; margin-inline: auto; display: block; overflow: visible; }
+.ladder { height: clamp(360px, calc(100svh - 425px), 640px); width: auto; max-width: 100%; margin-inline: auto; display: block; overflow: visible; }
 .ladder .heaven { fill: url(#heaven); animation: breathe 6s ease-in-out infinite; transform-origin: 180px 40px; }
 .ladder .beam { fill: url(#beam); animation: beam 7s ease-in-out infinite; }
 .ladder .cloud { fill: var(--ink); animation: drift 26s ease-in-out infinite alternate; }
@@ -145,8 +145,11 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
 .ladder .orb { fill: url(#orb); }
 .ladder .core { fill: #fffbe9; }
 .ladder .wing { fill: #fff3cf; opacity: 0.75; }
-.verse { margin: 26px auto 0; max-width: 21em; text-align: center; font-family: var(--serif); font-size: 18.5px; line-height: 1.9; color: var(--ink-2); text-wrap: balance; }
-.verse cite { display: block; margin-top: 8px; font-family: var(--sans); font-style: normal; font-size: 13px; letter-spacing: 0.06em; color: var(--gold); }
+.verse { position: relative; margin: 18px auto 0; padding-top: 26px; max-width: 19em; text-align: center; font-family: var(--serif); font-weight: 500; font-size: clamp(20px, 1.75vw, 25px); line-height: 1.65; letter-spacing: 0.01em; color: var(--gold-2); text-shadow: 0 0 26px color-mix(in srgb, var(--gold) 45%, transparent); text-wrap: balance; }
+.verse::before { content: ''; position: absolute; top: 5px; left: 50%; width: 190px; height: 1px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.verse::after { content: ''; position: absolute; top: 0; left: 50%; width: 9px; height: 9px; transform: translateX(-50%) rotate(45deg); background: var(--gold); box-shadow: 0 0 14px var(--gold); }
+.verse span { display: block; }
+.verse cite { display: block; margin-top: 12px; font-family: var(--sans); font-weight: 400; font-style: normal; font-size: 13px; letter-spacing: 0.14em; color: var(--muted); text-shadow: none; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes fade { to { opacity: 0.8; } }
 @keyframes fadeo { from { opacity: 0; } }
@@ -379,7 +382,7 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-art { order: -1; max-width: 300px; margin-inline: auto; }
   .hero-art .ladder { height: 400px; }
-  .verse { font-size: 16.5px; margin-top: 14px; }
+  .verse { font-size: 19px; margin-top: 18px; }
   .hero { padding-top: 20px; }
   .works { grid-template-columns: 1fr 1fr; }
   .card, .card.big, .works .card:nth-child(n + 6) { grid-column: span 1; min-height: 0; }
