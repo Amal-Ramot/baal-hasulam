@@ -128,21 +128,31 @@ a:hover > .arrow, .btn:hover .arrow { transform: translateX(-5px); }
 .hero-art { margin: 0; }
 .ladder { height: clamp(380px, calc(100svh - 330px), 640px); width: auto; max-width: 100%; margin-inline: auto; display: block; overflow: visible; }
 .ladder .heaven { fill: url(#heaven); animation: breathe 6s ease-in-out infinite; transform-origin: 180px 40px; }
-.ladder .ray { stroke: var(--gold-2); stroke-width: 1; opacity: 0.1; }
+.ladder .beam { fill: url(#beam); animation: beam 7s ease-in-out infinite; }
+.ladder .cloud { fill: var(--ink); animation: drift 26s ease-in-out infinite alternate; }
 .ladder .star { fill: var(--gold-2); animation: twinkle 4s calc(var(--d) * 1s) ease-in-out infinite; }
-.ladder .earth { fill: url(#earth); }
+.ladder .hill-far { fill: color-mix(in srgb, var(--gold) 13%, var(--bg)); }
+.ladder .hill-near { fill: color-mix(in srgb, var(--gold) 6%, var(--bg)); }
 .ladder .horizon { fill: none; stroke: url(#horizon); stroke-width: 1.2; }
-.ladder .stone { fill: color-mix(in srgb, var(--gold) 38%, var(--bg)); }
-.ladder .rail { stroke: url(#rail); stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 700; stroke-dashoffset: 700; animation: draw 2.4s 0.2s ease-out forwards; }
-.ladder .rung { stroke: var(--gold); stroke-width: 1.2; opacity: var(--o); animation: fadeo 1.2s calc(var(--k) * 0.1s + 0.9s) backwards; }
-.ladder text { font-family: var(--serif); font-size: 14px; fill: var(--ink-2); opacity: 0; animation: fade 1s calc(var(--k) * 0.12s + 1.2s) forwards; }
-.ladder .angel { fill: var(--gold-2); filter: drop-shadow(0 0 7px var(--gold)); }
+.ladder .pool { fill: url(#pool); }
+.ladder .stone { fill: color-mix(in srgb, var(--gold) 34%, var(--bg)); }
+.ladder .wood { animation: fadeo 1.6s 0.3s backwards; }
+.ladder .rail { fill: url(#rail); }
+.ladder .sheen { stroke: #fff3cf; stroke-width: 0.7; opacity: 0.55; }
+.ladder .rung { fill: url(#rung); }
+.ladder .rung-shadow { fill: #000; opacity: 0.35; }
+.ladder text { font-family: var(--serif); font-size: 13.5px; fill: var(--ink-2); opacity: 0; animation: fade 1s calc(var(--k) * 0.12s + 1.2s) forwards; }
+.ladder .orb { fill: url(#orb); }
+.ladder .core { fill: #fffbe9; }
+.ladder .wing { fill: #fff3cf; opacity: 0.75; }
 .verse { margin: 26px auto 0; max-width: 21em; text-align: center; font-family: var(--serif); font-size: 18.5px; line-height: 1.9; color: var(--ink-2); text-wrap: balance; }
 .verse cite { display: block; margin-top: 8px; font-family: var(--sans); font-style: normal; font-size: 13px; letter-spacing: 0.06em; color: var(--gold); }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 @keyframes fade { to { opacity: 0.8; } }
 @keyframes fadeo { from { opacity: 0; } }
 @keyframes twinkle { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.9; } }
+@keyframes beam { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+@keyframes drift { from { transform: translateX(-10px); } to { transform: translateX(12px); } }
 @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.08); opacity: 1; } }
 
 /* ---------- sections ---------- */
